@@ -1,0 +1,88 @@
+import java.util.Scanner;
+
+public class selectionsort {
+    
+    // Selection sort implementation
+    public static void selectionSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            // Swap
+            int temp = arr[minIndex];
+            arr[minIndex] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
+    // Method to print array
+    public static void printArray(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+
+    // Check if array is sorted in ascending order
+    public static boolean isSortedAscending(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] > arr[i + 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Check if array is sorted in descending order
+    public static boolean isSortedDescending(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] < arr[i + 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of elements: ");
+        int n = sc.nextInt();
+
+        int[] arr = new int[n];
+        System.out.println("Enter " + n + " elements:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        System.out.println("\nOriginal Array:");
+        printArray(arr);
+
+        // Analyze case based on input
+        if (isSortedAscending(arr)) {
+            System.out.println("Input Case: BEST CASE (Array already sorted)");
+        } else if (isSortedDescending(arr)) {
+            System.out.println("Input Case: WORST CASE (Array sorted in reverse order)");
+        } else {
+            System.out.println("Input Case: AVERAGE CASE (Random order)");
+        }
+
+        // Perform Selection Sort
+        selectionSort(arr);
+
+        System.out.println("\nSorted Array:");
+        printArray(arr);
+
+        // Complexity explanation
+        System.out.println("\nTime Complexity Justification:");
+        System.out.println(" - Best Case: O(n^2) (Selection Sort always scans full array even if sorted)");
+        System.out.println(" - Worst Case: O(n^2) (Still performs same comparisons, just more swaps)");
+        System.out.println(" - Average Case: O(n^2) (Random order still leads to ~n^2/2 comparisons)");
+    }
+}
+    
+
